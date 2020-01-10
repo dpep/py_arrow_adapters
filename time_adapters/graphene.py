@@ -1,5 +1,8 @@
 import graphene
 
+from arrow import Arrow
+
+
 PRECISION = 'second'
 
 
@@ -11,7 +14,7 @@ class ArrowDate(graphene.types.Date):
 
     @staticmethod
     def serialize(dt):
-        if isinstance(dt, arrow.Arrow):
+        if isinstance(dt, Arrow):
             dt = dt.date()
 
         return graphene.types.Date.serialize(dt)
@@ -23,7 +26,7 @@ class ArrowDateTime(graphene.types.DateTime):
 
     @staticmethod
     def serialize(dt):
-        if isinstance(dt, arrow.Arrow):
+        if isinstance(dt, Arrow):
             dt = dt.floor(PRECISION).datetime
 
         return graphene.types.DateTime.serialize(dt)

@@ -12,8 +12,9 @@ class ArrowType(TypeDecorator):
     DEFAULT_PRECISION = 'second'
 
 
-    def __init__(self, precision = None):
+    def __init__(self, precision=None, *args, **kwargs):
         self.precision = precision or self.DEFAULT_PRECISION
+        super(ArrowType, self).__init__(*args, **kwargs)
 
 
     def coerce(self, value):
