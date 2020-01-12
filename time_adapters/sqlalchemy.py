@@ -9,16 +9,16 @@ class ArrowType(TypeDecorator):
     '''
 
     impl = TIMESTAMP
-    DEFAULT_PRECISION = 'second'
+    PRECISION = 'microsecond'
+    TZ = 'local'
 
 
-    def __init__(self, precision=None, *args, **kwargs):
-        self.precision = precision or self.DEFAULT_PRECISION
+    def __init__(self, *args, **kwargs):
         super(ArrowType, self).__init__(*args, **kwargs)
 
 
     def coerce(self, value):
-        return arrow.get(value).floor(self.precision).to('local')
+        return arrow.get(value).floor(self.PRECISION).to(self.TZ)
 
 
     def process_bind_param(self, value, dialect):

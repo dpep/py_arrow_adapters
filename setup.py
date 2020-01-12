@@ -63,6 +63,7 @@ if __name__ == '__main__':
         test_suite='setup.discover_tests',
         tests_require=[
             'graphene',
+            'pytest',
             'sqlalchemy',
             'sqlite3',
         ],
