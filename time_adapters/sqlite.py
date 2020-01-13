@@ -1,12 +1,11 @@
-import sqlite3
-
 from arrow import Arrow
+from sqlite3 import adapt, register_adapter
 
 
 
-sqlite3.register_adapter(
+register_adapter(
     Arrow,
-    lambda x: sqlite3.adapt(x.to('UTC').datetime)
+    lambda x: adapt(x.to('UTC').naive)
 )
 
 # https://docs.python.org/3.7/library/sqlite3.html#sqlite3.register_adapter

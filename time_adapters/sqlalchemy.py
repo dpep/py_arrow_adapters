@@ -9,23 +9,25 @@ class ArrowType(TypeDecorator):
     '''
 
     impl = TIMESTAMP
-    PRECISION = 'microsecond'
-    TZ = 'local'
+    DEFAULT_PRECISION = 'microsecond'
+    DEFAULT_TZ = 'local'
 
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, precision=None, tz=None, *args, **kwargs):
+        self.precision = precision or self.DEFAULT_PRECISION
+        self.tz = tz or self.DEFAULT_TZ
         super(ArrowType, self).__init__(*args, **kwargs)
 
 
     def coerce(self, value):
-        return arrow.get(value).floor(self.PRECISION).to(self.TZ)
+        return arrow.get(value).floor(self.precision).to(self.tz)
 
 
     def process_bind_param(self, value, dialect):
         if value:
             # convert to UTC before saving to db
-            utc_val = self.coerce(value).to('UTC')
-            return utc_val.datetime if self.impl.timezone else utc_val.naive
+            return self.coerce(value).to('UTC').naive
+            # return utc_val.datetime if self.impl.timezone else utc_val.naive
 
         return value
 
