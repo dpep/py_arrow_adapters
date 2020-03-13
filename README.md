@@ -8,7 +8,7 @@ Making time play nice with others.
 
 
 ### Usage
-```
+```python
 import time_adapters.auto
 ```
 
