@@ -42,18 +42,18 @@ def discover_tests():
 if __name__ == '__main__':
 
     setuptools.setup(
-        name='time_adapters',
+        name='arrow_adapters',
         version=__version__,
-        url='https://github.com/dpep/py_time_adapters',
+        url='https://github.com/dpep/py_arrow_adapters',
         license='MIT',
         author='Daniel Pepper',
-        description='time adapters',
+        description='arrow adapters',
         long_description=open('README.md').read(),
         long_description_content_type='text/markdown',
         platforms='any',
 
         packages=[
-            'time_adapters',
+            'arrow_adapters',
         ],
 
         install_requires=[
@@ -63,6 +63,7 @@ if __name__ == '__main__':
         test_suite='setup.discover_tests',
         tests_require=[
             'graphene',
+            'graphene_sqlalchemy',
             'pytest',
             'sqlalchemy',
             'sqlite3',

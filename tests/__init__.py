@@ -1,6 +1,6 @@
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
-from time_adapters.sqlalchemy import ArrowType
+from arrow_adapters.sqlalchemy import ArrowType
 
 
 Base = declarative_base()

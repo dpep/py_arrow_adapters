@@ -1,15 +1,17 @@
-time-adapters
+arrow-adapters
 ======
-Making time play nice with others.
+Making the arrow time library play nice with others, so that every timestamp can have a timezone.  Support for: postgres, sqlite, sqlalchemy, graphene.
+
+Automatically converts time values to UTC before persisting in the DB and loads back with local timezone.
 
 
 ### Install
-```pip install time-adapters```
+```pip install arrow-adapters```
 
 
 ### Usage
 ```python
-import time_adapters.auto
+import arrow_adapters.auto
 ```
 
 ----

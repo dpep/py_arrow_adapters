@@ -4,7 +4,7 @@ import pytest
 from sqlalchemy.exc import InterfaceError
 
 from tests import Birthday
-from time_adapters.sqlalchemy import ArrowType
+from arrow_adapters.sqlalchemy import ArrowType
 
 
 format_str = 'YYYY-MM-DD HH:mm:ss.SSSSSS'
@@ -92,5 +92,5 @@ def test_sqlite_adapter(session, engine):
 
 
     # load sqlite adapter
-    import time_adapters.sqlite
+    import arrow_adapters.sqlite
     assert ts.to('UTC').format(format_str) == query()
