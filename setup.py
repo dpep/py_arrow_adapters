@@ -64,9 +64,10 @@ if __name__ == '__main__':
         tests_require=[
             'graphene',
             'graphene_sqlalchemy',
+            'psycopg2',
+            'pysqlite3',
             'pytest',
             'sqlalchemy',
-            'sqlite3',
         ],
 
         # https://pypi.python.org/pypi?%3Aaction=list_classifiers

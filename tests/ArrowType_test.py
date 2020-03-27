@@ -1,11 +1,11 @@
 import arrow
 import pytest
-
+from psycopg2 import ProgrammingError as PgError
+from psycopg2.extensions import adapt as pg_adapt
 from sqlalchemy.exc import InterfaceError
 
-from tests import Birthday
 from arrow_adapters.sqlalchemy import ArrowType
-
+from tests import Birthday
 
 format_str = 'YYYY-MM-DD HH:mm:ss.SSSSSS'
 
@@ -49,6 +49,8 @@ def test_precision(session):
 
 def test_tz_change(session):
     ts = seed(session)
+
+    assert str(ts) != str(ts.to('UTC'))
 
     res = session.query(Birthday).first().utc
     assert ts.to('UTC') == res
@@ -94,3 +96,14 @@ def test_sqlite_adapter(session, engine):
     # load sqlite adapter
     import arrow_adapters.sqlite
     assert ts.to('UTC').format(format_str) == query()
+
+
+def test_postgres_adapter():
+    ts = arrow.now('local')
+
+    with pytest.raises(PgError):
+        pg_adapt(ts)
+
+    # load postgres adapter
+    import arrow_adapters.postgres
+    assert str(ts.to('UTC')) == pg_adapt(ts)
